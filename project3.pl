@@ -9,67 +9,97 @@ start :- hypothesize(Animal),
       undo.
 
 /* hypotheses to be tested */
-hypothesize(Camping) :- Camping, !.
-hypothesize(Surfing) :- Surfing, !.
-hypothesize(Sightseeing) :- Sightseeing, !.
-hypothesize(RoadTrip) :- RoadTrip, !.
-hypothesize(BeachTrip) :- BeachTrip, !.
-hypothesize(Cycling) :- Cycling, !.
-hypothesize(Canoeing) :- Canoeing, !.
-hypothesize(Skiing) :- Skiing, !.
-hypothesize(Cruise) :- Cruise, !.
-hypothesize(ThemePark) :- ThemePark, !.
+hypothesize(camping) :- camping, !.
+hypothesize(surfing) :- surfing, !.
+hypothesize(sightseeing) :- sightseeing, !.
+hypothesize(roadTrip) :- roadTrip, !.
+hypothesize(beachTrip) :- beachTrip, !.
+hypothesize(cycling) :- cycling, !.
+hypothesize(canoeing) :- canoeing, !.
+hypothesize(skiing) :- skiing, !.
+hypothesize(cruise) :- cruise, !.
+hypothesize(themePark) :- themePark, !.
 hypothesize(unknown). /* the program could not come out with conclusion */
 
 /* travel type identification rules */
-Camping :- outdoors,
-           weeklong.
+camping :-  outdoors, 
+            weeklong,
+            verify(living_outside),
+            verify(no_amenities). 
 
-Surfing :- sunshine,
+surfing :- sunshine,
            weekend,
            water,
            verify(surfing_board).
 
-Sightseeing :- car,
+sightseeing :- car,
                weekend, 
                verify(explore_your_city).
 
-RoadTrip :- car, 
+roadTrip :- car, 
             weeklong,
             verify(visit_many_cities).
 
 
-BeachTrip :- sunshine,
+beachTrip :- sunshine,
              weekend,
              water,
              verify(sun_bathe).
 
-Cycling :- outdoors,
+cycling :- outdoors,
            weekend,
            sport,
+           verify(have_a_bicycle). 
 
-Canoeing :- outdoors,
+canoeing :- outdoors,
             weekend,
             sport,
             water,
+            verify(have_a_boat).
 
-Skiing :- outdoors,
+skiing :- outdoors,
           sport,
           weeklong,
+          verify(visit_mountains),
+          verify(travel_in_winter), 
+          verify(have_skis).
 
-Cruise :- water, 
+cruise :- water, 
           relaxing,
           weeklong,
           verify(drink_alcohol),
           verify(visit_many_countries).
 
-ThemePark :- outdoors,
+themePark :- outdoors,
              weekend,
              verify(like_cartoons),
              verify(like_rollercoasters).
   
 
 /* classification rules */
+outdoors :- verify(go_outdoors), !.
+outdoors :- verify(enjoy_nature).
+
+weeklong :- verify(travel_for_a_week).
+
+sunshine :- verify(enjoy_the_sun).
+
+weekend  :- verify(travel_for_a_weekend).
+
+water    :- outdoors, 
+            verify(go_on_water).
+
+moving   :- verify(not_stay_in_one_place). 
+         
+car      :- moving,
+            verify(have_a_car).
+
+sport    :- moving,
+            verify(enjoy_physical_activity).
+
+relaxing :- verify(relaxing_vacation).
+
+relaxing :- verify(nothing_to_do).
 
 
 /* how to ask questions */
