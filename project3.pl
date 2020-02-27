@@ -58,7 +58,6 @@ canoeing :- outdoors,
             verify(have_a_boat).
 
 skiing :- outdoors,
-          sport,
           weeklong,
           verify(visit_mountains),
           verify(travel_in_winter), 
@@ -94,8 +93,7 @@ moving   :- verify(not_stay_in_one_place).
 car      :- moving,
             verify(have_a_car).
 
-sport    :- moving,
-            verify(enjoy_physical_activity).
+sport    :- verify(enjoy_physical_activity).
 
 relaxing :- verify(relaxing_vacation).
 
