@@ -1,5 +1,7 @@
 /* prolog program to identify the type of travel you should do.  
-
+    Completed by Oleg Tielushko U48136789 and Tyler Brown U47820527
+    
+    This program will help determine the user their next vacation destination spot using backwards-chaining inference engine Prolog
     start with ?- start.     */
 
 start :- hypothesize(Animal),
@@ -28,12 +30,11 @@ camping :-  outdoors,
             verify(no_amenities). 
 
 surfing :- sunshine,
-           weekend,
            water,
            verify(surfing_board).
 
 sightseeing :- car,
-               weekend, 
+               daytrip, 
                verify(explore_your_city).
 
 roadTrip :- car, 
@@ -42,7 +43,6 @@ roadTrip :- car,
 
 
 beachTrip :- sunshine,
-             weekend,
              water,
              verify(sun_bathe).
 
@@ -52,7 +52,6 @@ cycling :- outdoors,
            verify(have_a_bicycle). 
 
 canoeing :- outdoors,
-            weekend,
             sport,
             water,
             verify(have_a_boat).
@@ -63,8 +62,7 @@ skiing :- outdoors,
           verify(travel_in_winter), 
           verify(have_skis).
 
-cruise :- water, 
-          relaxing,
+cruise :- relaxing,
           weeklong,
           verify(drink_alcohol),
           verify(visit_many_countries).
@@ -85,7 +83,10 @@ sunshine :- verify(enjoy_the_sun).
 
 weekend  :- verify(travel_for_a_weekend).
 
-water    :- outdoors, 
+daytrip  :- verify(travel_for_a_day).
+
+water    :- outdoors,
+            daytrip,
             verify(go_on_water).
 
 moving   :- verify(not_stay_in_one_place). 
@@ -95,7 +96,7 @@ car      :- moving,
 
 sport    :- verify(enjoy_physical_activity).
 
-relaxing :- verify(relaxing_vacation).
+relaxing :- verify(relaxing_vacation), !.
 
 relaxing :- verify(nothing_to_do).
 
