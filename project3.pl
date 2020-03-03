@@ -1,8 +1,17 @@
-/* prolog program to identify the type of travel you should do.  
-    Completed by Oleg Tielushko U48136789 and Tyler Brown U47820527
+/* # Prolog-diagnostic
+ This is an implementation of the prolog diagnostic program.
+
+This prolog program will help yo identify the type of travel you should do.
+
+Completed by Oleg Tielushko U48136789 and Tyler Brown U47820527
     
     This program will help determine the user their next vacation destination spot using backwards-chaining inference engine Prolog
-    start with ?- start.     */
+    
+    start with ?- start. 
+
+Note: The program was compiled and ran in GNU prolog, therefore the function assert() had to be replaced with a function asserta(); 
+(see line 113, 114 of project3.pl)
+*/
 
 start :- hypothesize(Animal),
       write('I guess that you should do this for your next travel trip: '),
@@ -46,13 +55,11 @@ beachTrip :- sunshine,
              water,
              verify(sun_bathe).
 
-cycling :- outdoors,
-           weekend,
+cycling :- weekend,
            sport,
            verify(have_a_bicycle). 
 
-canoeing :- outdoors,
-            sport,
+canoeing :- sport,
             water,
             verify(have_a_boat).
 
@@ -94,7 +101,9 @@ moving   :- verify(not_stay_in_one_place).
 car      :- moving,
             verify(have_a_car).
 
-sport    :- verify(enjoy_physical_activity).
+sport    :- moving,
+            outdoors,
+            verify(enjoy_physical_activity).
 
 relaxing :- verify(relaxing_vacation), !.
 
